@@ -1,0 +1,400 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Marcellus&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* Bootstrap, Swiper, and main.css are loaded via <link> tags in layout.tsx */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Tailwind v4 brand theme tokens ─── */
+@theme {
+  --color-primary: #FD4621;
+  --color-primary-light: #FBDFD1;
+  --color-secondary: #FBDFD1;
+  --color-brand-black: #111111;
+  --color-brand-black-2: #1E1E1E;
+  --color-text: #333333;
+  --color-gray-1: #DDDDDD;
+  --color-gray-2: #EEEEEE;
+  --color-success: #46E86A;
+  --color-danger: #FF252B;
+  --color-warning: #FFE453;
+
+  --font-body: 'DM Sans', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-jost: 'Jost', sans-serif;
+  --font-marcellus: 'Marcellus', serif;
+}
+
+.togo-destination-prev,
+.togo-destination-next {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #111;
+  z-index: 10;
+}
+
+.togo-destination-prev:hover,
+.togo-destination-next:hover {
+  background-color: #FD4621;
+  color: #fff;
+  border-color: #FD4621;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(253, 70, 33, 0.2);
+}
+
+/* ─── Global overrides / Next.js resets ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* html {
+  scroll-behavior: smooth;
+} */
+
+body {
+  font-family: var(--togo-ff-body, 'DM Sans', sans-serif);
+  font-size: 14px;
+  line-height: 26px;
+  color: var(--togo-text-body, #333333);
+  background-color: #fff;
+}
+
+/* ─── Status badge colours (used across booking/payment/review) ─── */
+.badge-pending {
+  background-color: #FFE453;
+  color: #111;
+}
+
+.badge-confirmed {
+  background-color: #46E86A;
+  color: #111;
+}
+
+.badge-cancelled {
+  background-color: #FF252B;
+  color: #fff;
+}
+
+.badge-completed {
+  background-color: #FD4621;
+  color: #fff;
+}
+
+.badge-on-hold {
+  background-color: #DDDDDD;
+  color: #111;
+}
+
+.badge-pending_payment {
+  background-color: #f97316;
+  color: #fff;
+}
+
+.badge-approved {
+  background-color: #46E86A;
+  color: #111;
+}
+
+.badge-rejected {
+  background-color: #FF252B;
+  color: #fff;
+}
+
+/* ─── Loader configuration ─── */
+/* .togo-loader {
+   Styles from main.css are used
+} */
+
+/* ─── React‑specific fixes ─── */
+#__next,
+main {
+  min-height: 100vh;
+}
+
+/* ─── Skeleton shimmer ─── */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(to right, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%);
+  background-size: 1000px 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: 4px;
+}
+
+.togo-hydrating {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* ─── Dashboard Settings ─── */
+.togo-dashboard-setting-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 576px) {
+  .togo-dashboard-setting-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.togo-dashboard-setting-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid #f0f0f0;
+  margin-bottom: 0;
+}
+
+.togo-dashboard-setting-tabs button {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #888;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.togo-dashboard-setting-tabs button:hover {
+  color: #111;
+}
+
+.togo-dashboard-setting-tabs button.active {
+  color: #111;
+  font-weight: 700;
+  border-bottom-color: #111;
+}
+
+.togo-contact-input input,
+.togo-contact-input select,
+.togo-contact-input textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #ECECEC;
+  border-radius: 6px;
+  font-size: 15px;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.togo-contact-input input:focus,
+.togo-contact-input select:focus,
+.togo-contact-input textarea:focus {
+  border-color: #FD4621;
+}
+
+/* ─── Dashboard Layout Overrides ─── */
+.togo-dashboard-sec,
+.togo-admin-sec {
+  overflow-x: hidden;
+}
+
+.togo-dashboard-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ─── SIDEBAR: Base transition ─── */
+.togo-dashboard-sidebar {
+  transition: left 0.3s ease;
+  z-index: 1050;
+  background-color: #fff;
+  border-right: 1px solid #eee;
+}
+
+/* ─── DESKTOP (≥1200px): Sidebar is always fixed & visible ─── */
+@media (min-width: 1200px) {
+  .togo-dashboard-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 280px !important;
+    height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    z-index: 1050 !important;
+    background-color: #fff !important;
+    border-right: 1px solid #eee !important;
+  }
+
+  .togo-dashboard-main-wrap {
+    margin-left: 280px !important;
+    width: calc(100% - 280px) !important;
+  }
+}
+
+/* ─── MOBILE/TABLET (<1200px): Sidebar is hidden, shows with .active class ─── */
+@media (max-width: 1199px) {
+  .togo-dashboard-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: -320px !important;
+    width: 280px !important;
+    height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    z-index: 2000 !important;
+    background-color: #fff !important;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* JSX applies 'active' class when hamburger is clicked */
+  .togo-dashboard-sidebar.active {
+    left: 0 !important;
+  }
+
+  /* No margin-left on main content for mobile/tablet */
+  .togo-dashboard-main-wrap {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* ─── Resetting/Disabling conflicting vendor styles from main.css ─── */
+.togo-dashboard-sidebar.sidebar-collapsed {
+  width: 250px !important;
+  flex: 0 0 250px !important;
+  padding: 0 !important;
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Ensure text is always visible in sidebars even if template JS tries to collapse it */
+.togo-dashboard-sidebar.sidebar-collapsed .togo-dashboard-nav-menu a,
+.togo-dashboard-sidebar.sidebar-collapsed .togo-dashboard-nav-menu a span:not(.togo-svg-icon) {
+  font-size: 14px !important;
+  opacity: 1 !important;
+  display: flex !important;
+  visibility: visible !important;
+}
+
+/* Ensure logo is always visible */
+.togo-dashboard-sidebar.sidebar-collapsed .togo-dashboard-nav-logo {
+  display: block !important;
+}
+
+/* Reset some default padding from template that might interfere */
+.togo-dashboard-nav {
+  padding: 0 !important;
+}
+
+.togo-dashboard-nav-menu {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+}
+
+.togo-dashboard-nav-menu::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+/* ─── MAIN WRAP ─── */
+.togo-dashboard-main-wrap {
+  flex: 1;
+  min-width: 0;
+  background-color: #FBFBFB;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ─── STICKY TOPBAR (header) ─── */
+.togo-dashboard-main-wrap .togo-dashboard-header {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 20px 60px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Notification dropdown needs position:relative parent for correct dropdown placement */
+.togo-dashboard-header-notifi {
+  position: relative;
+}
+
+/* ─── CONTENT AREA ─── */
+.togo-dashboard-main-wrap .togo-dashboard-content-area {
+  padding: 60px 60px !important;
+  flex: 1;
+}
+
+@media (max-width: 991px) {
+  .togo-dashboard-main-wrap .togo-dashboard-header {
+    padding: 12px 20px !important;
+  }
+
+  .togo-dashboard-main-wrap .togo-dashboard-content-area {
+    padding: 0px 0px !important;
+  }
+}
+
+/* Fix for chart container in AdminPage */
+#revenue-chart-container .recharts-responsive-container {
+  min-height: 300px;
+}
+
+/* Aggressively hide the global back-to-top button inside dashboard and admin pages
+   It is a sibling of page content in the root layout, so we use body:has() */
+body:has(.togo-dashboard-sec) .togo-back-wrapper,
+body:has(.togo-admin-sec) .togo-back-wrapper {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
+
+/* Prevent the hidden sidebar from creating horizontal scroll */
+body:has(.togo-dashboard-sec),
+body:has(.togo-admin-sec) {
+  overflow-x: hidden;
+}
+
+@media (max-width: 767px) {
+  .togo-tour-widget-filter .ui-slider .ui-slider-handle {
+    width: 32px !important;
+    height: 32px !important;
+    top: -13px !important;
+    z-index: 5 !important;
+    touch-action: none !important;
+  }
+
+  .togo-tour-widget-filter .ui-widget.ui-widget-content {
+    z-index: 1 !important;
+  }
+}
